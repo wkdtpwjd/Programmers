@@ -1,9 +1,4 @@
-SELECT COUNT(a.id) AS fish_count
-FROM FISH_INFO a
-JOIN FISH_NAME_INFO b ON a.fish_type = b.fish_type
-WHERE a.fish_type IN (
-    SELECT fish_type FROM FISH_NAME_INFO WHERE fish_name = 'BASS'
-)
-OR a.fish_type IN (
-    SELECT fish_type FROM FISH_NAME_INFO WHERE fish_name = 'SNAPPER'
-);
+-- 코드를 작성해주세요
+select count(a.id) as fish_count from FISH_INFO a
+join FISH_NAME_INFO b on a.fish_type = b.fish_type
+where b.fish_name in ('BASS','SNAPPER')
