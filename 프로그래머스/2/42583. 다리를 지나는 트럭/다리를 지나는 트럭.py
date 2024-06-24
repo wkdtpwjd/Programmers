@@ -1,16 +1,15 @@
 def solution(bridge_length,weight,truck_weights):
+    q = [0] * bridge_length
     second = 0
     current_w = 0
-    queue = [0] * bridge_length
-
     while truck_weights:
-        second += 1
-        current_w -= queue.pop(0)
+        second += 1  # 1초가 지나면 큐(다리)의 맨앞의 트럭도 빠짐
+        current_w -= q.pop(0)
         if current_w + truck_weights[0] <= weight:
-            queue.append(truck_weights[0])
+            q.append(truck_weights[0])
             current_w += truck_weights.pop(0)
         else:
-            queue.append(0)
+            q.append(0)
 
-    second += len(queue) # 마지막 트럭이 들어가면 나올때까지 시간더해주기
+    second += bridge_length
     return second
