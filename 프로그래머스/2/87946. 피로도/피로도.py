@@ -1,17 +1,17 @@
-import itertools
-
+from itertools import permutations
 def solution(k,dungeons):
-    initial = k
-    arr = [] # 각 순열의 순서에 맞게 참가했을떄 참가할 수 있는 던전수 담는 리스트
-    perms = itertools.permutations(dungeons)
-    for p in perms:
+    arr = []
+    dungeons = permutations(dungeons)
+    for i in dungeons:
         cnt = 0
-        for d in p:
-            if d[0] <= k:
-                k -= d[1]
+        a = k
+        for j in i:
+            if a>= j[0]:
                 cnt += 1
+                a -= j[1]
             else:
+                arr.append(cnt)
                 break
-        arr.append(cnt)
-        k = initial
+        else:
+            arr.append(cnt)
     return max(arr)
