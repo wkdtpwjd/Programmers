@@ -1,18 +1,17 @@
-N = int(input())
+n = int(input())
 arr = list(map(int,input().split()))
-X = int(input())
-arr.sort()
+x = int(input())
 
-left = 0
-right = N-1
-cnt = 0
-while left<right:
-    sum_v = arr[left] + arr[right]
-    if sum_v > X:
-        right -= 1
-    elif sum_v < X:
-        left += 1
-    elif sum_v == X :
-        cnt += 1
-        left += 1
-print(cnt)
+answer = 0
+arr.sort()
+l,r = 0,len(arr)-1
+while l<r:
+    temp = arr[l]+arr[r]
+    if temp == x:
+        answer += 1
+        r-= 1
+    elif temp < x:
+        l += 1
+    else:
+        r -= 1
+print(answer)
