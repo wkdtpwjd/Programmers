@@ -1,7 +1,7 @@
 def solution(n,wires):
     def dfs(start,ignore):
+        cnt = 0
         visited = [0] * (n+1)
-        cnt = 1
         stack = [start]
         visited[start] = 1
         while stack:
@@ -18,23 +18,19 @@ def solution(n,wires):
                 stack.pop()
         return cnt
 
-    graph = {}
-    # 연결정보 만들기
-    for a,b in wires:
-        if a not in graph:
-            graph[a] = [b]
+
+    graph = {} # 전력망연결정보를 나타내는 그래프
+    for i in wires:
+        if i[0] not in graph:
+            graph[i[0]] = [i[1]]
         else:
-            graph[a].append(b)
-        if b not in graph:
-            graph[b] = [a]
+            graph[i[0]].append(i[1])
+        if i[1] not in graph:
+            graph[i[1]] = [i[0]]
         else:
-            graph[b].append(a)
-    diff = []
-    for a,b in wires:
-        diff.append(abs(dfs(a,b)-dfs(b,a)))
+            graph[i[1]].append(i[0])
+
+    diff = [] # wires배열의 처음부터 전력망을 끊었을때 송전탑개수의 차이를 담을배열
+    for i in wires:
+        diff.append(abs(dfs(i[0],i[1])-dfs(i[1],i[0])))
     return min(diff)
-
-
-
-
-
